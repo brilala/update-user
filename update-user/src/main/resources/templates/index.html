@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Users Manager</title>
+</head>
+<body>
+	<div align="center">
+		<div>
+			<h1>User Manager</h1>
+			<a href="newUser">Add New User</a> <br />
+			<br />
+		</div>
+
+		<div>&nbsp;</div>
+		<div>
+			<form th:action="@{/}">
+				Search by user name: <input type="text" name="keyword" th:value="${keyword}" required />
+				&nbsp;
+				<input type="submit" value="Search"/>
+				<!-- &nbsp;
+				<input type="button" value="Clear Search"/>-->
+			</form>
+		</div>
+
+		<div>&nbsp;</div>
+		<div>
+			<br />
+			<br />
+			<table border="1" cellpadding="10">
+				<thead>
+					<tr>
+						<th>User ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>User Name</th>
+						<!--<th>Password</th>-->
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="users : ${listUsers}">
+						<td th:text="${users.id}">User ID</td>
+						<td th:text="${users.firstname}">First Name</td>
+						<td th:text="${users.lastname}">Last Name</td>
+						<td th:text="${users.username}">User Name</td>
+						<!--<td th:text="${users.password}">Password</td>-->
+						<td><a th:href="@{'/editUser/' + ${users.id}}">Edit User</a>
+							&nbsp;&nbsp;&nbsp;&nbsp; <a
+							th:href="@{'/deleteUser/' + ${users.id}}">Delete User</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</body>
+</html>
